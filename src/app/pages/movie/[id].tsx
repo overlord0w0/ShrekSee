@@ -20,7 +20,6 @@ const MovieDetailsPage = () => {
     return (
         <div className="p-8 bg-gray-900 text-white min-h-screen">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-8">
-                {/* Постер */}
                 <div className="flex-shrink-0">
                     <img
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -29,11 +28,9 @@ const MovieDetailsPage = () => {
                     />
                 </div>
 
-                {/* Інформація про фільм */}
                 <div className="flex-1">
                     <h1 className="text-4xl font-bold text-yellow-500 mb-4">{movie.title}</h1>
 
-                    {/* Жанри */}
                     <div className="flex gap-2 mb-4">
                         {movie.genres?.map((genre) => (
                             <span
@@ -45,17 +42,14 @@ const MovieDetailsPage = () => {
                         ))}
                     </div>
 
-                    {/* Рейтинг */}
                     <p className="text-lg mb-4">
                         <strong>Rating:</strong> {movie.vote_average}/10
                     </p>
 
-                    {/* Дата релізу */}
                     <p className="text-lg mb-4">
                         <strong>Release Date:</strong> {movie.release_date}
                     </p>
 
-                    {/* Опис */}
                     <p className="text-gray-300 leading-relaxed">{movie.overview}</p>
                 </div>
             </div>

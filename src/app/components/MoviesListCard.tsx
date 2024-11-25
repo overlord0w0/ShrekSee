@@ -1,5 +1,6 @@
+'use client';
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const MoviesListCard = ({ movie }: { movie: any }) => {
     const router = useRouter();
