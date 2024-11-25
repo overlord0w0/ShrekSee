@@ -1,18 +1,23 @@
+// hooks/useMovieDetails.ts
 import { useState, useEffect } from 'react';
-import { getMovieById } from '../services/apiService';
 
-const useMovieDetails = (id: number) => {
-    const [movie, setMovie] = useState(null);
+const useMovieDetails = (movieId: number) => {
+    const [movie, setMovie] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
+        if (!movieId) return; // Якщо немає movieId, не робимо запит
+
         const fetchMovieDetails = async () => {
             try {
-                setLoading(true);
-                const data = await getMovieById(id);
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=YOUR_API_KEY`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie details');
+                }
+                const data = await response.json();
                 setMovie(data);
-            } catch (err) {
+            } catch (err: any) {
                 setError(err);
             } finally {
                 setLoading(false);
@@ -20,7 +25,7 @@ const useMovieDetails = (id: number) => {
         };
 
         fetchMovieDetails();
-    }, [id]);
+    }, [movieId]);
 
     return { movie, loading, error };
 };

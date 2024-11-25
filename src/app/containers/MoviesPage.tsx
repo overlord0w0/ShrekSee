@@ -2,7 +2,7 @@
 import React from 'react';
 import useMovies from '../hooks/useMovies';
 import MoviesList from '../components/MoviesList';
-import Header from '../components/Header';
+
 
 const MoviesPage = () => {
     const { movies, loading, error } = useMovies(1);
