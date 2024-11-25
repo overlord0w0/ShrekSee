@@ -1,18 +1,26 @@
 import React from 'react';
-import PosterPreview from './PosterPreview';
-import StarsRating from './StarsRating';
+import { useRouter } from 'next/router';
 
-const MoviesListCard = ({ movie }) => {
+const MoviesListCard = ({ movie }: { movie: any }) => {
+    const router = useRouter();
+
+    const handleCardClick = () => {
+        router.push(`/movie/${movie.id}`);
+    };
+
     return (
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-            <PosterPreview posterPath={movie.poster_path} title={movie.title} />
-            <div className="p-4">
-                <h2 className="text-2xl font-bold mb-2 text-yellow-500">{movie.title}</h2>
-                <StarsRating rating={movie.vote_average} />
-                <p className="text-gray-400 mt-2 line-clamp-3">{movie.overview}</p>
-            </div>
-        </div>
-    );
-};
+        <div
+            className="cursor-pointer p-4 bg-gray-800 rounded-lg hover:shadow-lg"
+            onClick={handleCardClick}
+        >
+            <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="rounded-lg"
+                    />
+                    <h2 className="mt-4 text-lg font-bold text-yellow-500">{movie.title}</h2>
+                    </div>
+                    );
+                };
 
 export default MoviesListCard;
