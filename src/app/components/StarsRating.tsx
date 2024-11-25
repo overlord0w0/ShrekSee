@@ -1,7 +1,7 @@
 import React from 'react';
 
 const StarsRating = ({ rating }) => {
-    const stars = Math.round(rating / 2); // TMDB має рейтинг до 10, ділимо на 2 для зірок до 5
+    const stars = Math.round(rating / 2);
 
     return (
         <div className="flex items-center">

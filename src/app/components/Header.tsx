@@ -3,23 +3,25 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { searchMovies } from '../services/apiService';
+import { getGenres } from '../services/apiService';
 
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [genres, setGenres] = useState<any[]>([]);
+    const [showGenres, setShowGenres] = useState(false); // Стан для показу/сховання жанрів
 
     useEffect(() => {
-        if (searchQuery.length > 2) {
-            const fetchMovies = async () => {
-                const results = await searchMovies(searchQuery);
-                setSearchResults(results.results || []);
-            };
-            fetchMovies();
-        } else {
-            setSearchResults([]);
-        }
-    }, [searchQuery]);
+        const fetchGenres = async () => {
+            const genresData = await getGenres();
+            setGenres(genresData.genres);
+        };
+        fetchGenres();
+    }, []);
+
+    const toggleGenres = () => {
+        setShowGenres(!showGenres);
+    };
 
     return (
         <header className="flex items-center justify-between p-4 bg-black text-yellow-500">
@@ -34,9 +36,28 @@ const Header = () => {
                 <h1 className="text-4xl font-custom">ShrekSee</h1>
             </div>
 
-            <nav className="flex items-center space-x-8">
+            <nav className="flex items-center space-x-8 relative">
                 <Link href="/" className="hover:text-white font-custom">Movies</Link>
-                <Link href="/genres" className="hover:text-white font-custom">Genres</Link>
+                <button
+                    onClick={toggleGenres}
+                    className="hover:text-white font-custom relative"
+                >
+                    Genres
+                </button>
+
+                {showGenres && (
+                    <div className="absolute top-full mt-2 left-0 w-48 bg-black border border-yellow-500 rounded-lg z-10">
+                        <ul className="p-2">
+                            {genres.map(genre => (
+                                <li key={genre.id} className="p-2 hover:bg-yellow-500 hover:text-black">
+                                    <Link href={`/genre/${genre.id}`} className="block">
+                                        {genre.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </nav>
 
             <div className="relative flex items-center space-x-4">

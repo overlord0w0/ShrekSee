@@ -2,7 +2,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getMovieById, getGenres } from '../../services/apiService'; // Імпортуємо API функції
+import { getMovieById, getGenres } from '../../services/apiService';
 import StarsRating from '../../components/StarsRating';
 
 const MovieDetailPage = () => {
