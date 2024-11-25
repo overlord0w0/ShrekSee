@@ -7,7 +7,7 @@ const useMovieDetails = (movieId: number) => {
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        if (!movieId) return; // Якщо немає movieId, не робимо запит
+        if (!movieId) return;
 
         const fetchMovieDetails = async () => {
             try {

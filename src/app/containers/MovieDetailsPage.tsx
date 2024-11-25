@@ -2,13 +2,12 @@
 
 import React from 'react';
 import { useRouter } from 'next/router';
-import useMovieDetails from '../hooks/useMovieDetails'; // Імпортуємо хук
+import useMovieDetails from '../hooks/useMovieDetails';
 
 const MovieDetailsPage = () => {
     const router = useRouter();
     const { id } = router.query;
 
-    // Перевірка, чи id ще завантажується
     if (!id) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-black text-white">
@@ -17,7 +16,6 @@ const MovieDetailsPage = () => {
         );
     }
 
-    // Використання кастомного хука
     const { movie, loading, error } = useMovieDetails(Number(id));
 
     if (loading) {
@@ -36,7 +34,6 @@ const MovieDetailsPage = () => {
         );
     }
 
-    // Перевірка на наявність даних про фільм
     if (!movie) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-black text-white">

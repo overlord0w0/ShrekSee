@@ -1,4 +1,4 @@
-'use client';  // Це вказує Next.js, що компонент використовує хоки і повинен рендеритись на клієнті.
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -23,7 +23,6 @@ const Header = () => {
 
     return (
         <header className="flex items-center justify-between p-4 bg-black text-yellow-500">
-            {/* Логотип та назва */}
             <div className="flex items-center space-x-2">
                 <Image
                     src="/shrek.png"
@@ -52,7 +51,6 @@ const Header = () => {
                     <span className="text-yellow-500 ml-2">🔍</span>
                 </div>
 
-                {/* Випадаючий список результатів */}
                 {searchResults.length > 0 && (
                     <ul className="absolute top-full mt-2 w-full bg-black border border-yellow-500 rounded-lg z-10">
                         {searchResults.map((movie) => (
@@ -65,7 +63,6 @@ const Header = () => {
                     </ul>
                 )}
 
-                {/* Аватар і ім'я */}
                 <div className="flex flex-col items-center">
                     <Image
                         src="/Group 20.png"
